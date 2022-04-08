@@ -1,0 +1,7 @@
+[hltv-api]
+endpoint = 'https://hltv-api.netlify.app/.netlify/functions'
+results = '/results'
+match = '/match'
+
+[subscription]
+stars_min = 2

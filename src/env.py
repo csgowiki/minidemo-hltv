@@ -4,9 +4,10 @@ check if the environment is compatible with the program.
 '''
 
 import platform
-from sys import version_info as vinfo
 import subprocess
 import socket
+import os
+from sys import version_info as vinfo
 
 
 def __is_net_ok(host: str) -> bool:
@@ -34,6 +35,8 @@ def __env_check():
         raise Exception('Dependencies are not installed.')
     if not __is_net_ok('hltv.org'):
         raise Exception('Network is not available.')
+    if not os.path.exists('config.toml'):
+        raise Exception('config.toml is not found.')
 
 
 def init_env():

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from src.env import init_env
+from src.manage import manager
 
 '''
 python3 main.py
 '''
 if __name__ == '__main__':
-    init_env()
+    manager.execute()

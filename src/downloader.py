@@ -54,7 +54,7 @@ class Downloader(object):
                     total=file_size_bytes/_cksize,
                     unit='B',
                     unit_scale=True,
-                    mininterval=file_size_bytes/_cksize*0.05
+                    mininterval=10.0
                 ):
                     if not chunk:
                         continue

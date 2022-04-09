@@ -44,4 +44,8 @@ def __env_check():
 
 def init_env():
     __env_check()
-    logging.basicConfig(level=logging.INFO, format='%(levelname)s:%(asctime)s:%(message)s', datefmt='%Y-%d-%m %H:%M:%S')
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(levelname)s:%(asctime)s:%(message)s',
+        datefmt='%Y-%d-%m %H:%M:%S'
+    )

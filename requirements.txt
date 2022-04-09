@@ -1,3 +1,4 @@
 requests
 pydantic
 toml
+tqdm

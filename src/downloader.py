@@ -54,7 +54,7 @@ class Downloader(object):
                     total=file_size_bytes/_cksize,
                     unit='B',
                     unit_scale=True,
-                    mininterval=file_size_bytes/_cksize * 0.05
+                    mininterval=file_size_bytes/_cksize*0.05
                 ):
                     if not chunk:
                         continue
@@ -68,7 +68,7 @@ class Downloader(object):
     def export_demos(self) -> list:
         if subprocess.run(['unrar', 'x', self._rar_path, self._dl_dir]).returncode != 0:
             logging.error(f"<{self._rar_path}> unrar failed")
-        shutil.rmtree(self._rar_path)
+        os.remove(self._rar_path)
         return list(map(
             lambda x: os.path.join(self._dl_dir, x),
             os.listdir(self._dl_dir)

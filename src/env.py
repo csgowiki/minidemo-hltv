@@ -7,6 +7,7 @@ import platform
 import subprocess
 import socket
 import os
+import logging
 from sys import version_info as vinfo
 
 
@@ -37,7 +38,10 @@ def __env_check():
         raise Exception('Network is not available.')
     if not os.path.exists('config.toml'):
         raise Exception('config.toml is not found.')
+    if not os.path.exists('minidemo-encoder'):
+        raise Exception('minidemo-encoder is not found.')
 
 
 def init_env():
     __env_check()
+    logging.basicConfig(level=logging.INFO, format='%(levelname)s:%(asctime)s:%(message)s', datefmt='%Y-%d-%m %H:%M:%S')

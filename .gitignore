@@ -1,4 +1,6 @@
 *.json
+minidemo-encoder/
+download_temp/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

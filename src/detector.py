@@ -34,14 +34,14 @@ class Detector(object):
         _url = f"{self.__contact_api('results')}?startDate={yesterdayStr}&endDate={todayStr}"
         self.matches = list(
             filter(self.__match_filter, requests.get(_url).json()))
-    
-    def get_one_match(self) -> Tuple[bool, MatchInfo]:
+
+    def get_one_match(self) -> MatchInfo:
         '''
-        return (True, match_info) if there is a match
-        return (False, None) if there is no match
+        return matchInfo if there is a match
+        return None if there is no match
         '''
         if self.ptr >= len(self.matches):
-            return (False, None)
+            return None
 
         _url = f"{self.__contact_api('match')}?id={self.matches[self.ptr]['id']}"
         resp = requests.get(_url).json()
@@ -61,17 +61,17 @@ class Detector(object):
                 'teamId': resp['team1']['id'],
                 'teamName': resp['team1']['name'],
                 'winner': resp['winnerTeam']['id'] == resp['team1']['id'],
-                'score': len(list(filter(lambda x: x['result']['team1TotalRounds'] > x['result']['team2TotalRounds'], resp['maps'])))
+                'score': len(list(filter(lambda x: 'result' in x and x['result']['team1TotalRounds'] > x['result']['team2TotalRounds'], resp['maps'])))
             },
             'team2': {
                 'teamId': resp['team2']['id'],
                 'teamName': resp['team2']['name'],
                 'winner': resp['winnerTeam']['id'] == resp['team2']['id'],
-                'score': len(list(filter(lambda x: x['result']['team1TotalRounds'] < x['result']['team2TotalRounds'], resp['maps'])))
+                'score': len(list(filter(lambda x: 'result' in x and x['result']['team1TotalRounds'] < x['result']['team2TotalRounds'], resp['maps'])))
             }
         })
 
         self.ptr += 1
         time.sleep(0.5)
 
-        return (True, matchInfo)
+        return matchInfo

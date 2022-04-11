@@ -2,3 +2,4 @@ requests
 pydantic
 toml
 tqdm
+cos-python-sdk-v5

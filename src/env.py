@@ -30,7 +30,7 @@ def __env_check():
     '''
     if not (vinfo.major == 3 and vinfo.minor >= 8):
         raise Exception('Python 3.8 or later is required.')
-    if (_os := platform.system()) != 'Linux':
+    if (_os := platform.system()) not in ['Linux', 'Darwin']:
         raise Exception(f'OS Linux is required. Current system is {_os}.')
     if subprocess.run(['sh', 'scripts/check_dependencies.sh']).returncode != 0:
         raise Exception('Dependencies are not installed.')

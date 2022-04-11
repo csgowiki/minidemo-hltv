@@ -5,6 +5,7 @@ import subprocess
 from src.env import init_env
 from src.detector import Detector
 from src.downloader import Downloader
+from src.cos_api import BucketAPI
 
 
 class Manager(object):
@@ -12,6 +13,7 @@ class Manager(object):
         init_env()
         self._dt = Detector()
         self._dl = Downloader()
+        self._bucket = BucketAPI()
 
     def execute(self):
         while matchInfo := self._dt.get_one_match():
@@ -22,8 +24,9 @@ class Manager(object):
             for demopath in demopaths:
                 if subprocess.run(['sh', 'scripts/parse_demo.sh', demopath]).returncode != 0:
                     logging.error(f'parse_demo.sh failed: {demopath}')
-                else:
-                    logging.info('parse_demo.sh success')
+                    continue
+                mapname = 'de_' + demopath.split('-')[-1].split('.')[0]
+                self._bucket.upload_match(matchInfo.matchId, mapname)
             sleep(1.0)
 
 

@@ -20,9 +20,8 @@ class BucketAPI(object):
             Prefix=mapname + '/',
             Delimiter='/'
         )
-        print(response)
-        return []
-        return list(map(lambda x: x['Prefix'], response['CommonPrefixes']))
+        vl = filter(lambda x: 'Prefix' in x, response['CommonPrefixes'])
+        return list(map(lambda x: x['Prefix'], vl))
     
     def __upload_file(self, key: str, path: str):
         self.cos_client.upload_file(

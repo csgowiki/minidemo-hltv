@@ -20,7 +20,7 @@ class BucketAPI(object):
             Prefix=mapname + '/',
             Delimiter='/'
         )
-        vl = filter(lambda x: 'Prefix' in x, response['CommonPrefixes'])
+        vl = filter(lambda x: 'Prefix' in x, response.get('CommonPrefixes', []))
         return list(map(lambda x: x['Prefix'], vl))
     
     def __upload_file(self, key: str, path: str):
@@ -30,10 +30,14 @@ class BucketAPI(object):
             LocalFilePath=path,
         )
 
-    def upload_match(self, matchId: int, mapname: str):
+    def upload_match(self, matchId: int, mapname: str, maxreserve: int = 5):
         areadyList = self.list_matches(mapname)
         if f'{mapname}/{matchId}/' in areadyList:
             logging.warning(f'{mapname}/{matchId}/ already uploaded')
+            return
+        if len(areadyList) >= maxreserve:
+            logging.warning(f'{mapname}/{matchId}/ already full, start to delete')
+            logging.warning('LIST:', areadyList)
             return
 
         base_dir = 'minidemo-encoder/output'

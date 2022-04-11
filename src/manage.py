@@ -26,7 +26,11 @@ class Manager(object):
                     logging.error(f'parse_demo.sh failed: {demopath}')
                     continue
                 mapname = 'de_' + demopath.split('-')[-1].split('.')[0]
-                self._bucket.upload_match(matchInfo.matchId, mapname)
+                self._bucket.upload_match(
+                    matchInfo.matchId,
+                    mapname,
+                    self._dt.config['storage']['max_match_per_map']
+                )
             sleep(1.0)
 
 

@@ -23,12 +23,13 @@ jobs:
       # Setup ubuntu env
       - name: env setup
         run: |
-          echo ${{ secrets.TencentCloud.TENCENTCLOUDBUCKETNAME }}
-          sudo apt update -y
-          sudo apt install unrar
-          sudo apt install golang-go
-          pip3 install -r requirements.txt
-          git clone https://github.com/csgowiki/minidemo-encoder
+          echo ${{ secrets.TENCENTCLOUDBUCKETNAME }}
+          echo ${{ TencentCloud.TENCENTCLOUDBUCKETNAME }}
+          # sudo apt update -y
+          # sudo apt install unrar
+          # sudo apt install golang-go
+          # pip3 install -r requirements.txt
+          # git clone https://github.com/csgowiki/minidemo-encoder
       # execute command
       # - name: Run script
         # run: python3 main.py

@@ -23,8 +23,7 @@ jobs:
       # Setup ubuntu env
       - name: env setup
         run: |
-          echo ${{ secrets.TENCENTCLOUDBUCKETNAME }}
-          echo ${{ env.TencentCloud.TENCENTCLOUDBUCKETNAME }}
+          echo ${{ secrets.COS_BUCKETNAME }}
           # sudo apt update -y
           # sudo apt install unrar
           # sudo apt install golang-go

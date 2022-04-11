@@ -22,6 +22,10 @@ jobs:
           python-version: 3.8.5
       # Setup ubuntu env
       - name: env setup
+        env:
+          COS_SECRETID: ${{ secrets.COS_SECRETID }}
+          COS_SECRETKEY: ${{ secrets.COS_SECRETKEY }}
+          COS_BUCKETNAME: ${{ secrets.COS_BUCKETNAME }}
         run: |
           sudo apt update -y
           sudo apt install unrar

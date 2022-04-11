@@ -23,12 +23,11 @@ jobs:
       # Setup ubuntu env
       - name: env setup
         run: |
-          echo ${{ secrets.COS_BUCKETNAME }}
-          # sudo apt update -y
-          # sudo apt install unrar
-          # sudo apt install golang-go
-          # pip3 install -r requirements.txt
-          # git clone https://github.com/csgowiki/minidemo-encoder
+          sudo apt update -y
+          sudo apt install unrar
+          sudo apt install golang-go
+          pip3 install -r requirements.txt
+          git clone https://github.com/csgowiki/minidemo-encoder
       # execute command
-      # - name: Run script
-        # run: python3 main.py
+      - name: Run script
+        run: python3 main.py

@@ -7,12 +7,12 @@ from tqdm import tqdm
 
 class BucketAPI(object):
     def __init__(self):
-        _secret_id = os.getenv('TENCENTCLOUDSECRETID')
-        _secret_key = os.getenv('TENCENTCLOUDSECRETKEY')
+        _secret_id = os.getenv('env.TENCENTCLOUDSECRETID')
+        _secret_key = os.getenv('env.TENCENTCLOUDSECRETKEY')
         _region = 'ap-chengdu'
         _config = CosConfig(Region=_region, SecretId=_secret_id, SecretKey=_secret_key)
         self.cos_client = CosS3Client(_config)
-        self.bucket_name = os.getenv('TENCENTCOUDBUCKETNAME')
+        self.bucket_name = os.getenv('env.TENCENTCOUDBUCKETNAME')
 
     def list_matches(self, mapname: str) -> list: # 'de_inferno/123123/'
         response = self.cos_client.list_objects(

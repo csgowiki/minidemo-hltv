@@ -51,3 +51,6 @@ class BucketAPI(object):
                     _key = '/'.join([mapname, str(matchId), round_key, torct, player_key])
                     self.__upload_file(_key, _finalpath)
         logging.info('uploading match %s done', matchId)
+    
+    def update_index(self):
+        pass

@@ -17,7 +17,6 @@ class Manager(object):
 
     def execute(self):
         while matchInfo := self._dt.get_one_match():
-            # download demo
             self._dl.set_matchInfo(matchInfo)
             self._dl.start_download()
             demopaths = self._dl.export_demos()
@@ -31,6 +30,7 @@ class Manager(object):
                     mapname,
                     self._dt.config['storage']['max_match_per_map']
                 )
+                self._bucket.update_index()
                 subprocess.run(['rm', '-rf', 'minidemo-encoder/output'])
             sleep(1.0)
 

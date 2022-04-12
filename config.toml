@@ -4,7 +4,7 @@ results = '/results'
 match = '/match'
 
 [subscription]
-stars_min = 2
+stars_min = 1
 
 [storage]
 max_match_per_map = 5

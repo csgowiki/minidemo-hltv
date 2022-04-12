@@ -31,6 +31,7 @@ class Manager(object):
                     mapname,
                     self._dt.config['storage']['max_match_per_map']
                 )
+                subprocess.run(['rm', '-rf', 'minidemo-encoder/output'])
             sleep(1.0)
 
 

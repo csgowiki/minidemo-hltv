@@ -21,7 +21,7 @@ class Detector(object):
     def __match_filter(self, match: dict) -> bool:
         return (
             match['stars'] >= self.config['subscription']['stars_min'] and
-            (match['date'] / 1000 - time.time()) / 3600 <= 23.9
+            (match['date'] / 1000 - time.time()) / 3600 <= 24 * 3
         )
 
     def __contact_api(self, api: str) -> str:
@@ -30,7 +30,7 @@ class Detector(object):
     def __request_today_matches(self):
         _now = datetime.datetime.now()
         todayStr = _now.strftime('%Y-%m-%d')
-        yesterdayStr = (_now - datetime.timedelta(days=1)).strftime('%Y-%m-%d')
+        yesterdayStr = (_now - datetime.timedelta(days=3)).strftime('%Y-%m-%d')
         _url = f"{self.__contact_api('results')}?startDate={yesterdayStr}&endDate={todayStr}"
         self.matches = list(
             filter(self.__match_filter, requests.get(_url).json()))

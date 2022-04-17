@@ -8,7 +8,8 @@ class TeamResult(BaseModel):
     teamName: str
     winner: bool
     score: int
-
+    players: list = [] # [playerName]
+    ctRounds: list = [] # [int]
 
 # only for 1 map
 class MatchInfo(BaseModel):
@@ -20,6 +21,7 @@ class MatchInfo(BaseModel):
     mformat: str      # match format
     team1: TeamResult
     team2: TeamResult
+    maxround: int = 0
 
 class MatchMapInfo(BaseModel):
     mapName: str

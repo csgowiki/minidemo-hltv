@@ -34,4 +34,5 @@ jobs:
           COS_SECRETID: ${{ secrets.COS_SECRETID }}
           COS_SECRETKEY: ${{ secrets.COS_SECRETKEY }}
           COS_BUCKETNAME: ${{ secrets.COS_BUCKETNAME }}
+          COS_REGION: ${{ secrets.COS_REGION }}
         run: python3 main.py

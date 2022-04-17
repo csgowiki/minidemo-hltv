@@ -50,6 +50,7 @@ class Detector(object):
         # assume idx 0 is demolink
         if len(resp['demos']) > 0 and resp['demos'][0]['name'] == 'GOTV Demo':
             demoLink = resp['demos'][0]['link']
+        
         matchInfo = MatchInfo(**{
             'matchId': resp['id'],
             'demoLink': demoLink,
@@ -61,13 +62,15 @@ class Detector(object):
                 'teamId': resp['team1']['id'],
                 'teamName': resp['team1']['name'],
                 'winner': resp['winnerTeam']['id'] == resp['team1']['id'],
-                'score': len(list(filter(lambda x: 'result' in x and x['result']['team1TotalRounds'] > x['result']['team2TotalRounds'], resp['maps'])))
+                'score': len(list(filter(lambda x: 'result' in x and x['result']['team1TotalRounds'] > x['result']['team2TotalRounds'], resp['maps']))),
+                'players': [player['name'] for player in resp['players']['team1']]
             },
             'team2': {
                 'teamId': resp['team2']['id'],
                 'teamName': resp['team2']['name'],
                 'winner': resp['winnerTeam']['id'] == resp['team2']['id'],
-                'score': len(list(filter(lambda x: 'result' in x and x['result']['team1TotalRounds'] < x['result']['team2TotalRounds'], resp['maps'])))
+                'score': len(list(filter(lambda x: 'result' in x and x['result']['team1TotalRounds'] < x['result']['team2TotalRounds'], resp['maps']))),
+                'players': [player['name'] for player in resp['players']['team2']]
             }
         })
 

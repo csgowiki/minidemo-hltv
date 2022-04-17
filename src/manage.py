@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import gc
 from time import sleep
 import logging
 import subprocess
@@ -30,9 +31,10 @@ class Manager(object):
                     mapname,
                     self._dt.config['storage']['max_match_per_map']
                 )
-                self._bucket.update_index()
+                self._bucket.update_index(mapname, matchInfo)
                 subprocess.run(['rm', '-rf', 'minidemo-encoder/output'])
             sleep(1.0)
+            gc.collect()
 
 
 manager = Manager()

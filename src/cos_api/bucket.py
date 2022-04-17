@@ -2,6 +2,7 @@
 import os
 import logging
 import json
+import time
 import requests
 from qcloud_cos import CosConfig
 from qcloud_cos import CosS3Client
@@ -32,14 +33,15 @@ class BucketAPI(object):
             if response['IsTruncated'] == 'false':
                 break
         return contents
-    
+
     def __upload_file(self, key: str, path: str):
         self.cos_client.upload_file(
             Bucket=self.bucket_name,
             Key=key,
             LocalFilePath=path,
         )
-    
+        time.sleep(0.1)
+
     def __delete_prefix(self, prefix: str):
         logging.warning('deleting %s', prefix)
         is_over = False
@@ -75,7 +77,7 @@ class BucketAPI(object):
                     _key = '/'.join([mapname, str(matchId), round_key, torct, player_key])
                     self.__upload_file(_key, _finalpath)
         logging.info('uploading match %s done', matchId)
-    
+
     def update_index(self, mapname: str, match_info: MatchInfo):
         # call after upload_match
         flist = []
@@ -94,7 +96,7 @@ class BucketAPI(object):
             if os.path.exists(f'{basedir}/round{rd}/ct/{match_info.team1.players[0]}.rec'):
                 match_info.team1.ctRounds.append(rd)
             if os.path.exists(f'{basedir}/round{rd}/t/{match_info.team2.players[0]}.rec'):
-                match_info.team2.tRounds.append(rd)
+                match_info.team2.ctRounds.append(rd)
         match_dict = match_info.dict()
 
         logging.warning(f'update index: {match_dict}')
@@ -111,5 +113,5 @@ class BucketAPI(object):
 
         with open(f'{basedir}/index.json', 'w') as f:
             json.dump(index_dict, f)
-        
+
         self.__upload_file(f'{mapname}/index.json', f'{basedir}/index.json')

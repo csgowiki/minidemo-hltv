@@ -95,7 +95,7 @@ class BucketAPI(object):
         for rd in range(match_info.maxround):
             if os.path.exists(f'{basedir}/round{rd}/ct/{match_info.team1.players[0]}.rec'):
                 match_info.team1.ctRounds.append(rd)
-            if os.path.exists(f'{basedir}/round{rd}/t/{match_info.team2.players[0]}.rec'):
+            if os.path.exists(f'{basedir}/round{rd}/ct/{match_info.team2.players[0]}.rec'):
                 match_info.team2.ctRounds.append(rd)
         match_dict = match_info.dict()
 

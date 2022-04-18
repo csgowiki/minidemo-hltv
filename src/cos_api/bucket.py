@@ -62,9 +62,8 @@ class BucketAPI(object):
             return
         if len(areadyList) >= maxreserve:
             logging.warning(f'{mapname}/{matchId}/ already full, start to delete')
-            logging.warning('LIST:', areadyList)
+            logging.warning(f'LIST: {areadyList}')
             self.__delete_prefix(areadyList[-1])
-            return
 
         base_dir = 'minidemo-encoder/output'
         logging.info('uploading match %s', matchId)

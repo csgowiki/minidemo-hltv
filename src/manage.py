@@ -19,7 +19,9 @@ class Manager(object):
     def execute(self):
         while matchInfo := self._dt.get_one_match():
             self._dl.set_matchInfo(matchInfo)
-            self._dl.start_download()
+            if not self._dl.start_download():
+                logging.error(f"download failed: {matchInfo}")
+                continue
             demopaths = self._dl.export_demos()
             for demopath in demopaths:
                 if subprocess.run(['sh', 'scripts/parse_demo.sh', demopath]).returncode != 0:

@@ -66,6 +66,7 @@ class Downloader(object):
         return True
 
     def export_demos(self) -> list:
+        logging.warning(f'rar_path: <{self._rar_path}>, dl_dir: {self._dl_dir}')
         if subprocess.run(['unrar', 'x', self._rar_path, self._dl_dir]).returncode != 0:
             logging.error(f"<{self._rar_path}> unrar failed")
         os.remove(self._rar_path)

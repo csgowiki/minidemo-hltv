@@ -91,6 +91,9 @@ class BucketAPI(object):
         roundlist.sort()
         match_info.maxround = roundlist[-1] + 1
 
+        # clear ctRounds record since 1 match with many maps
+        match_info.team1.ctRounds = []
+        match_info.team2.ctRounds = []
         for rd in range(match_info.maxround):
             if os.path.exists(f'{basedir}/round{rd}/ct/{match_info.team1.players[0]}.rec'):
                 match_info.team1.ctRounds.append(rd)

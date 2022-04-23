@@ -40,7 +40,7 @@ class BucketAPI(object):
             Key=key,
             LocalFilePath=path,
         )
-        time.sleep(0.1)
+        time.sleep(0.01)
 
     def __delete_prefix(self, prefix: str):
         logging.warning('deleting %s', prefix)

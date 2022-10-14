@@ -35,7 +35,7 @@ class Detector(object):
         print('requesting:', _url)
         self.matches = list(
             filter(self.__match_filter, requests.get(_url).json()))
-        print('result:', self.mathces)
+        print('result:', self.matches)
 
     def get_one_match(self) -> MatchInfo:
         '''

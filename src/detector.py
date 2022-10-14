@@ -33,6 +33,7 @@ class Detector(object):
         yesterdayStr = (_now - datetime.timedelta(days=1)).strftime('%Y-%m-%d')
         _url = f"{self.__contact_api('results')}?startDate={yesterdayStr}&endDate={todayStr}"
         print('requesting:', _url)
+        _url = 'https://hltv-api.netlify.app/.netlify/functions/results?startDate=2022-10-01&endDate=2022-10-02'
         self.matches = list(
             filter(self.__match_filter, requests.get(_url).json()))
         print('result:', self.matches)

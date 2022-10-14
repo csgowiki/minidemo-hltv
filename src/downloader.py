@@ -38,6 +38,7 @@ class Downloader(object):
 
         _dl_filename = f'{self._matchInfo.demoLink.split("/")[-1]}.rar'
         _url = f"https://hltv.org{self._matchInfo.demoLink}"
+        print('downloading:', _url)
         resp = requests.get(_url, headers=self._headers, stream=True)
         if resp.status_code != requests.codes.ok:
             return False
